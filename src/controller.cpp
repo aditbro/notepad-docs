@@ -12,13 +12,12 @@ void Controller::run() {
     std::string text;
 
     while(isThreadRunning) {
-        std::cin >> text;
-        emit updateContent(QString::fromStdString(text));
+
     }
 }
 
-void Controller::broadcastCommand() {
-
+void Controller::broadcastCommand(QString message) {
+    emit updateContent(message);
 }
 
 Controller::~Controller() {

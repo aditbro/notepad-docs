@@ -19,6 +19,6 @@ private :
 signals :
     void updateContent(QString content);
 
-private slots :
-    void broadcastCommand();
+public slots :
+    void broadcastCommand(QString message);
 };

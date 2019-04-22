@@ -78,8 +78,17 @@ public:
     ~Notepad();
 //! [5]
 
+private:
+    void keyPressEvent(QKeyEvent *);
+
+    void keyReleaseEvent(QKeyEvent *);
+
+    bool eventFilter(QObject *, QEvent *);
+
 signals:
     void contentChanged();
+
+    void keyPressed(QString);
 
 public slots:
     void setText(QString text);

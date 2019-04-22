@@ -63,6 +63,7 @@
 #endif // QT_PRINTSUPPORT_LIB
 #include <QFont>
 #include <QFontDialog>
+#include <QKeyEvent>
 
 #include "notepad.h"
 #include "ui_notepad.h"
@@ -73,6 +74,7 @@ Notepad::Notepad(QWidget *parent) :
 {
     ui->setupUi(this);
     this->setCentralWidget(ui->textEdit);
+    this->ui->textEdit->installEventFilter(this);
 
     connect(ui->actionNew, &QAction::triggered, this, &Notepad::newDocument);
     connect(ui->actionOpen, &QAction::triggered, this, &Notepad::open);
@@ -254,4 +256,28 @@ void Notepad::about()
 void Notepad::setText(QString text)
 {
     this->ui->textEdit->setText(text);
+}
+
+bool Notepad::eventFilter(QObject *obj, QEvent *event) {
+    if (obj == this->ui->textEdit) {
+        if (event->type() == QEvent::KeyPress) {
+            QKeyEvent *keyEvent = static_cast<QKeyEvent*>(event);
+            keyPressEvent(keyEvent);
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        // pass the event on to the parent class
+        return QMainWindow::eventFilter(obj, event);
+    }
+}
+
+void Notepad::keyPressEvent(QKeyEvent *e) {
+    QString pressedKey = e->text();
+    emit keyPressed(pressedKey);
+}
+
+void Notepad::keyReleaseEvent(QKeyEvent *e) {
+//    QMainWindow::keyReleaseEvent(e);
 }

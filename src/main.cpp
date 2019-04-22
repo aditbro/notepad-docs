@@ -60,6 +60,7 @@ int main(int argc, char *argv[])
     Editor.show();
 
     QObject::connect(&cc, &Controller::updateContent, &Editor, &Notepad::setText);
+    QObject::connect(&Editor, &Notepad::keyPressed, &cc, &Controller::broadcastCommand);
 
     return EditorApp.exec();
 }
