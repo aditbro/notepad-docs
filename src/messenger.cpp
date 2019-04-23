@@ -14,6 +14,10 @@ Messenger::Messenger() {
     Messenger(8181);
 }
 
+Messenger::~Messenger() {
+    stopServer();
+}
+
 Messenger::Messenger(int port) {
     int listenPort = port;
 
@@ -88,6 +92,7 @@ void Messenger::sendingServer() {
 void Messenger::sendData(CRDT data) {
     const char* serialized_data = data.serialize();
     for(struct sockaddr_in client : clients) {
+        std::cout << "sending data " << data.getValue() << std::endl;
         sendto(sendSocket, serialized_data, sizeof(CRDT), MSG_WAITALL, (struct sockaddr *) &client, sizeof(client));
     }
 }
@@ -102,16 +107,16 @@ void Messenger::receivingServer() {
         std::cout << newData.getValue() << " newcoming data value" << std::endl;
         this->inboxDataQ.push(newData);
     }
+
+    std::cout << "receiving server end" << std::endl;
 }
 
 void Messenger::stopServer() {
     if(isServerRunning && isSenderRunning) {
-        isServerRunning = false;
-
-        clients = std::vector<struct sockaddr_in>();
         addClient("127.0.0.1", listenPort);
         CRDT stop(0, 0, '0', 0.0);
         sendData(stop);
+        isServerRunning = false;
         while(isInboxEmpty());
         close(listenSocket);
         serverThread.join();

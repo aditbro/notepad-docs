@@ -37,6 +37,7 @@ private:
 public:
     Messenger();
     Messenger(int port);
+    ~Messenger();
 
     void addClient(std::string clientAddress, int port);
     struct sockaddr_in getClient(int idx);
