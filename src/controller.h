@@ -1,8 +1,6 @@
 #ifndef CONTROLLER_H
 #define CONTROLLER_H
 
-#endif // CONTROLLER_H
-
 #include <QObject>
 #include <thread>
 
@@ -22,3 +20,5 @@ signals :
 public slots :
     void broadcastCommand(QString message);
 };
+
+#endif // CONTROLLER_H

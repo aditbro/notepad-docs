@@ -6,11 +6,19 @@ requires(qtConfig(fontdialog))
 
 SOURCES += \
     controller.cpp \
+    crdt.cpp \
+    crdtTest.cpp \
     main.cpp\
+    messenger.cpp \
+    messengerTest.cpp \
     notepad.cpp
 
 HEADERS += notepad.h \
-    controller.h
+    controller.h \
+    crdt.h \
+    crdtTest.h \
+    messenger.h \
+    messengerTest.h
 
 FORMS += notepad.ui
 

@@ -47,13 +47,30 @@
 ** $QT_END_LICENSE$
 **
 ****************************************************************************/
+#include <QApplication>
+#include <QString>
+#include <iostream>
 
 #include "notepad.h"
 #include "controller.h"
-#include <QApplication>
+#include "crdt.h"
+
+//testing
+#include "crdtTest.h"
+#include "messengerTest.h"
 
 int main(int argc, char *argv[])
 {
+    try {
+        serializationTest();
+        testAddClient();
+        testThreadingQueue();
+    } catch (const char* exc) {
+        std::cout << exc << std::endl;
+    } catch (...) {
+        std::cout << "one of the test failed" << std::endl;
+    }
+
     QApplication EditorApp(argc, argv);
     Notepad Editor;
     Controller cc;

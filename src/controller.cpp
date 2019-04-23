@@ -4,7 +4,7 @@
 #include "controller.h"
 
 Controller::Controller() {
-    this->isThreadRunning = true;
+    this->isThreadRunning = false;
     this->mainThread = std::thread(&Controller::run, this);
 }
 

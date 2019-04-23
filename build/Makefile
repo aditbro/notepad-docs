@@ -37,7 +37,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = notepad1.0.0
-DISTDIR = /home/aditbro/Projects/sister/bin/.tmp/notepad1.0.0
+DISTDIR = /home/aditbro/Projects/sister/build/.tmp/notepad1.0.0
 LINK          = g++
 LFLAGS        = -Wl,-rpath,/home/aditbro/Qt/5.12.2/gcc_64/lib
 LIBS          = $(SUBLIBS) -L/home/aditbro/Qt/5.12.2/gcc_64/lib -lQt5PrintSupport -lQt5Widgets -lQt5Gui -lQt5Core -lGL -lpthread   
@@ -53,12 +53,20 @@ OBJECTS_DIR   = ./
 ####### Files
 
 SOURCES       = ../src/controller.cpp \
+		../src/crdt.cpp \
+		../src/crdtTest.cpp \
 		../src/main.cpp \
+		../src/messenger.cpp \
+		../src/messengerTest.cpp \
 		../src/notepad.cpp qrc_notepad.cpp \
 		moc_notepad.cpp \
 		moc_controller.cpp
 OBJECTS       = controller.o \
+		crdt.o \
+		crdtTest.o \
 		main.o \
+		messenger.o \
+		messengerTest.o \
 		notepad.o \
 		qrc_notepad.o \
 		moc_notepad.o \
@@ -256,8 +264,16 @@ DIST          = ../../../Qt/5.12.2/gcc_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.12.2/gcc_64/mkspecs/features/yacc.prf \
 		../../../Qt/5.12.2/gcc_64/mkspecs/features/lex.prf \
 		../src/notepad.pro ../src/notepad.h \
-		../src/controller.h ../src/controller.cpp \
+		../src/controller.h \
+		../src/crdt.h \
+		../src/crdtTest.h \
+		../src/messenger.h \
+		../src/messengerTest.h ../src/controller.cpp \
+		../src/crdt.cpp \
+		../src/crdtTest.cpp \
 		../src/main.cpp \
+		../src/messenger.cpp \
+		../src/messengerTest.cpp \
 		../src/notepad.cpp
 QMAKE_TARGET  = notepad
 DESTDIR       = 
@@ -683,8 +699,8 @@ distdir: FORCE
 	$(COPY_FILE) --parents $(DIST) $(DISTDIR)/
 	$(COPY_FILE) --parents ../src/notepad.qrc $(DISTDIR)/
 	$(COPY_FILE) --parents ../../../Qt/5.12.2/gcc_64/mkspecs/features/data/dummy.cpp $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/notepad.h ../src/controller.h $(DISTDIR)/
-	$(COPY_FILE) --parents ../src/controller.cpp ../src/main.cpp ../src/notepad.cpp $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/notepad.h ../src/controller.h ../src/crdt.h ../src/crdtTest.h ../src/messenger.h ../src/messengerTest.h $(DISTDIR)/
+	$(COPY_FILE) --parents ../src/controller.cpp ../src/crdt.cpp ../src/crdtTest.cpp ../src/main.cpp ../src/messenger.cpp ../src/messengerTest.cpp ../src/notepad.cpp $(DISTDIR)/
 	$(COPY_FILE) --parents ../src/notepad.ui $(DISTDIR)/
 
 
@@ -852,7 +868,7 @@ moc_notepad.cpp: ../src/notepad.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qicon.h \
 		moc_predefs.h \
 		../../../Qt/5.12.2/gcc_64/bin/moc
-	/home/aditbro/Qt/5.12.2/gcc_64/bin/moc $(DEFINES) --include /home/aditbro/Projects/sister/bin/moc_predefs.h -I/home/aditbro/Qt/5.12.2/gcc_64/mkspecs/linux-g++ -I/home/aditbro/Projects/sister/src -I/home/aditbro/Qt/5.12.2/gcc_64/include -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtPrintSupport -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtWidgets -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtGui -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../src/notepad.h -o moc_notepad.cpp
+	/home/aditbro/Qt/5.12.2/gcc_64/bin/moc $(DEFINES) --include /home/aditbro/Projects/sister/build/moc_predefs.h -I/home/aditbro/Qt/5.12.2/gcc_64/mkspecs/linux-g++ -I/home/aditbro/Projects/sister/src -I/home/aditbro/Qt/5.12.2/gcc_64/include -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtPrintSupport -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtWidgets -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtGui -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../src/notepad.h -o moc_notepad.cpp
 
 moc_controller.cpp: ../src/controller.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/QObject \
@@ -907,7 +923,7 @@ moc_controller.cpp: ../src/controller.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qobject_impl.h \
 		moc_predefs.h \
 		../../../Qt/5.12.2/gcc_64/bin/moc
-	/home/aditbro/Qt/5.12.2/gcc_64/bin/moc $(DEFINES) --include /home/aditbro/Projects/sister/bin/moc_predefs.h -I/home/aditbro/Qt/5.12.2/gcc_64/mkspecs/linux-g++ -I/home/aditbro/Projects/sister/src -I/home/aditbro/Qt/5.12.2/gcc_64/include -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtPrintSupport -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtWidgets -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtGui -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../src/controller.h -o moc_controller.cpp
+	/home/aditbro/Qt/5.12.2/gcc_64/bin/moc $(DEFINES) --include /home/aditbro/Projects/sister/build/moc_predefs.h -I/home/aditbro/Qt/5.12.2/gcc_64/mkspecs/linux-g++ -I/home/aditbro/Projects/sister/src -I/home/aditbro/Qt/5.12.2/gcc_64/include -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtPrintSupport -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtWidgets -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtGui -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../src/controller.h -o moc_controller.cpp
 
 compiler_moc_objc_header_make_all:
 compiler_moc_objc_header_clean:
@@ -930,11 +946,9 @@ compiler_clean: compiler_rcc_clean compiler_moc_predefs_clean compiler_moc_heade
 
 ####### Compile
 
-controller.o: ../src/controller.cpp ../src/controller.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/QObject \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qobject.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qobjectdefs.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qnamespace.h \
+controller.o: ../src/controller.cpp ../../../Qt/5.12.2/gcc_64/include/QtCore/QString \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qstring.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qchar.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qglobal.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qconfig-bootstrapped.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qconfig.h \
@@ -956,16 +970,19 @@ controller.o: ../src/controller.cpp ../src/controller.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qmutex.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qnumeric.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qversiontagging.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qstring.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qchar.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qbytearray.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qnamespace.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qarraydata.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qstringliteral.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qstringalgorithms.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qstringview.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qstringbuilder.h \
+		../src/controller.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/QObject \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qobject.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qlist.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qalgorithms.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qiterator.h \
@@ -983,9 +1000,15 @@ controller.o: ../src/controller.cpp ../src/controller.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qobject_impl.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controller.o ../src/controller.cpp
 
-main.o: ../src/main.cpp ../src/notepad.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/QMainWindow \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qmainwindow.h \
+crdt.o: ../src/crdt.cpp ../src/crdt.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o crdt.o ../src/crdt.cpp
+
+crdtTest.o: ../src/crdtTest.cpp ../src/crdtTest.h \
+		../src/crdt.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o crdtTest.o ../src/crdtTest.cpp
+
+main.o: ../src/main.cpp ../../../Qt/5.12.2/gcc_64/include/QtWidgets/QApplication \
+		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qapplication.h \
 		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qtwidgetsglobal.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qtguiglobal.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qglobal.h \
@@ -1011,22 +1034,20 @@ main.o: ../src/main.cpp ../src/notepad.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qversiontagging.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qtgui-config.h \
 		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qtwidgets-config.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qwidget.h \
-		../../../Qt/5.12.2/gcc_64/include/QtGui/qwindowdefs.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qobjectdefs.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qnamespace.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
-		../../../Qt/5.12.2/gcc_64/include/QtGui/qwindowdefs_win.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qobject.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qcoreapplication.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qstring.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qchar.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qbytearray.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qrefcount.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qnamespace.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qarraydata.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qstringliteral.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qstringalgorithms.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qstringview.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qstringbuilder.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qobject.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qobjectdefs.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qlist.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qalgorithms.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qiterator.h \
@@ -1042,11 +1063,17 @@ main.o: ../src/main.cpp ../src/notepad.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qcontainerfwd.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qobject_impl.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qeventloop.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qpoint.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qsize.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qcursor.h \
+		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
+		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qwidget.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qmargins.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qpaintdevice.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qrect.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qsize.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qpoint.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qpalette.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qcolor.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qrgb.h \
@@ -1072,7 +1099,6 @@ main.o: ../src/main.cpp ../src/notepad.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qfontmetrics.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qfontinfo.h \
 		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qsizepolicy.h \
-		../../../Qt/5.12.2/gcc_64/include/QtGui/qcursor.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qkeysequence.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qevent.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qvariant.h \
@@ -1088,18 +1114,30 @@ main.o: ../src/main.cpp ../src/notepad.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qfiledevice.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qvector2d.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qtouchdevice.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qguiapplication.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qinputmethod.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/QString \
+		../src/notepad.h \
+		../../../Qt/5.12.2/gcc_64/include/QtWidgets/QMainWindow \
+		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qicon.h \
 		../src/controller.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/QObject \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/QApplication \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qapplication.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qcoreapplication.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qeventloop.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../../Qt/5.12.2/gcc_64/include/QtGui/qguiapplication.h \
-		../../../Qt/5.12.2/gcc_64/include/QtGui/qinputmethod.h
+		../src/crdt.h \
+		../src/crdtTest.h \
+		../src/messengerTest.h \
+		../src/messenger.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../src/main.cpp
+
+messenger.o: ../src/messenger.cpp ../src/messenger.h \
+		../src/crdt.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o messenger.o ../src/messenger.cpp
+
+messengerTest.o: ../src/messengerTest.cpp ../src/messengerTest.h \
+		../src/messenger.h \
+		../src/crdt.h
+	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o messengerTest.o ../src/messengerTest.cpp
 
 notepad.o: ../src/notepad.cpp ../../../Qt/5.12.2/gcc_64/include/QtCore/QFile \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qfile.h \
@@ -1225,6 +1263,7 @@ notepad.o: ../src/notepad.cpp ../../../Qt/5.12.2/gcc_64/include/QtCore/QFile \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/QFont \
 		../../../Qt/5.12.2/gcc_64/include/QtWidgets/QFontDialog \
 		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qfontdialog.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/QKeyEvent \
 		../src/notepad.h \
 		../../../Qt/5.12.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qmainwindow.h \
