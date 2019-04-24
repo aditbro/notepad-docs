@@ -7,6 +7,7 @@
 #include <queue>
 #include "messenger.h"
 #include "crdt.h"
+#include "vvector.h"
 
 class Controller : public QObject {
     Q_OBJECT
@@ -28,13 +29,17 @@ private :
     void processKeyPress();
     void processMessage();
 
+    void renderContent();
+
     std::string content;
     std::queue<CRDT> keyPressQ;
+    std::queue<CRDT> deleteBuffer;
     std::vector<CRDT> crdtVector;
+    Vvector version;
 
     int cursorPosition;
 
-    void operationDelete(CRDT keypress);
+    void operationDelete();
     void operationInsert(CRDT keypress);
     void moveCursor(CRDT keypress);
 

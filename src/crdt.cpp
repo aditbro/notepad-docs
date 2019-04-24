@@ -46,6 +46,14 @@ double CRDT::getPosition(){
     return this->position;
 }
 
+void CRDT::setCounter(int counter) {
+    this->counter = counter;
+}
+
+int CRDT::getCounter() {
+    return this->counter;
+}
+
 char* CRDT::serialize() {
     return reinterpret_cast<char*>(this);
 }

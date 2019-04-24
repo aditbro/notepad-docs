@@ -20,6 +20,7 @@ Messenger::~Messenger() {
 
 Messenger::Messenger(int port) {
     int listenPort = port;
+    selfSiteId = port;
 
     memset(&servaddr, 0, sizeof(servaddr));
     memset(&cliaddr, 0, sizeof(cliaddr));
@@ -90,8 +91,11 @@ void Messenger::sendingServer() {
 }
 
 void Messenger::sendData(CRDT data) {
+    data.setSiteId(selfSiteId);
     const char* serialized_data = data.serialize();
+    int i = 1;
     for(struct sockaddr_in client : clients) {
+//        sleep(1);
         std::cout << "sending data " << data.getValue() << std::endl;
         sendto(sendSocket, serialized_data, sizeof(CRDT), MSG_WAITALL, (struct sockaddr *) &client, sizeof(client));
     }

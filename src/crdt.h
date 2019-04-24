@@ -11,6 +11,7 @@
 class CRDT {
 private:
     int siteId;
+    int counter;
     char command;
     char value;
     double position;
@@ -23,11 +24,13 @@ public:
     void setCommand(char);
     void setValue(char);
     void setPosition(double);
+    void setCounter(int);
 
     int getSiteId();
     char getCommand();
     char getValue();
     double getPosition();
+    int getCounter();
 
     char* serialize();
     static CRDT deserialize(char*);

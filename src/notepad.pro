@@ -11,14 +11,16 @@ SOURCES += \
     main.cpp\
     messenger.cpp \
     messengerTest.cpp \
-    notepad.cpp
+    notepad.cpp \
+    vvector.cpp
 
 HEADERS += notepad.h \
     controller.h \
     crdt.h \
     crdtTest.h \
     messenger.h \
-    messengerTest.h
+    messengerTest.h \
+    vvector.h
 
 FORMS += notepad.ui
 

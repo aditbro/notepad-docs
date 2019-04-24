@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE QtCreatorProject>
-<!-- Written by QtCreator 4.9.0, 2019-04-23T19:37:17. -->
+<!-- Written by QtCreator 4.9.0, 2019-04-25T01:13:32. -->
 <qtcreator>
  <data>
   <variable>EnvironmentId</variable>
@@ -306,7 +306,7 @@
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DefaultDisplayName">notepad</value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.DisplayName"></value>
     <value type="QString" key="ProjectExplorer.ProjectConfiguration.Id">Qt4ProjectManager.Qt4RunConfiguration:/home/aditbro/Projects/sister/src/notepad.pro</value>
-    <value type="QString" key="RunConfiguration.Arguments"></value>
+    <value type="QString" key="RunConfiguration.Arguments">5001 5002 5003</value>
     <value type="uint" key="RunConfiguration.QmlDebugServerPort">3768</value>
     <value type="bool" key="RunConfiguration.UseCppDebugger">false</value>
     <value type="bool" key="RunConfiguration.UseCppDebuggerAuto">true</value>

@@ -45,6 +45,7 @@ public:
 
     bool isInboxEmpty();
     CRDT popInbox();
+    int selfSiteId;
 
     void runServer();
     void stopServer();

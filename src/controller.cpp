@@ -15,7 +15,7 @@ bool isdoubleEqual(double x1, double x2) {
 }
 
 Controller::Controller() {
-
+    Controller(5932);
 }
 
 Controller::~Controller(){
@@ -28,11 +28,13 @@ Controller::Controller(int port) {
     cursorPosition = 0;
     isThreadRunning = true;
     msgr = new Messenger(port);
+    version.addSiteId(msgr->selfSiteId);
     msgr->runServer();
     mainThread = std::thread(&Controller::mainControl, this);
 }
 
 void Controller::mainControl() {
+    int counter = 1;
     while(isThreadRunning) {
         if(!keyPressQ.empty()) {
             processKeyPress();
@@ -41,7 +43,25 @@ void Controller::mainControl() {
         if(!msgr->isInboxEmpty()) {
             processMessage();
         }
+
+        if(!deleteBuffer.empty()){
+            operationDelete();
+            updateView();
+        }
+
+        counter = (counter+1)%100000000;
+        if(counter == 0) {
+            renderContent();
+        }
     }
+}
+
+void Controller::renderContent() {
+    content = "";
+    for(CRDT data : crdtVector) {
+        content.append(1, data.getValue());
+    }
+    updateView();
 }
 
 double Controller::getKeyPressDeletePosition(CRDT keyPress) {
@@ -78,15 +98,22 @@ void Controller::processKeyPress() {
     std::cout << "received pos " << keyPress.getPosition() << std::endl;
 
     if(keyPress.getCommand() == 'D') {
+        version.incrementVersion(msgr->selfSiteId);
         if(cursorPosition == 0) {
             return;
         }
-        keyPress.setPosition(getKeyPressDeletePosition(keyPress));
-
-        operationDelete(keyPress);
+        if(keyPress.getValue() == crdtVector.at(keyPress.getPosition()-1).getValue()) {
+            keyPress = crdtVector.at(keyPress.getPosition()-1);
+            keyPress.setCommand('D');
+        }
+        keyPress.setCounter(version.getCurrentVersion(msgr->selfSiteId));
+        deleteBuffer.push(keyPress);
+//        operationDelete(keyPress);
         broadcastCommand(keyPress);
     } else if (keyPress.getCommand() == 'I') {
+        version.incrementVersion(msgr->selfSiteId);
         keyPress.setPosition(getKeyPressInsertPosition(keyPress));
+        keyPress.setCounter(version.getCurrentVersion(msgr->selfSiteId));
         operationInsert(keyPress);
         broadcastCommand(keyPress);
     } else if (keyPress.getCommand() == 'M') {
@@ -97,18 +124,41 @@ void Controller::processKeyPress() {
 }
 
 void Controller::processMessage() {
+    CRDT message = msgr->popInbox();
+    std::cout << "messaged pos " << message.getPosition() << std::endl;
+    version.setVersion(message.getSiteId(), message.getCounter());
+    if(message.getCommand() == 'D') {
+        deleteBuffer.push(message);
+    } else if (message.getCommand() == 'I') {
+        operationInsert(message);
+    }
 
+    updateView();
 }
 
-void Controller::operationDelete(CRDT keypress) {
+void Controller::operationDelete() {
+    CRDT keypress = deleteBuffer.front();
     int crdtIndex = getCRDTIndex(keypress);
     if(crdtIndex != -1 && keypress.getValue() == crdtVector.at(crdtIndex).getValue()) {
         crdtVector.erase(crdtVector.begin() + crdtIndex);
         content.erase(crdtIndex, 1);
-        cursorPosition = cursorPosition - 1;
+        if(crdtIndex <= cursorPosition) {
+            cursorPosition = cursorPosition - 1;
+        }
+
+        deleteBuffer.pop();
+
+    } else if(version.getCurrentVersion(keypress.getSiteId()) < keypress.getCounter()){
+        //skip and wait until the counter met
+        std::cout << "deletion delayed" << std::endl;
+        std::cout << "siteId " << keypress.getSiteId() << std::endl;
+        std::cout << "version " << keypress.getCounter() << std::endl;
+        std::cout << "available version " << version.getCurrentVersion(keypress.getSiteId()) << std::endl;
+
     } else {
         std::cout << "deletion not found" << std::endl;
         std::cout << "val " << keypress.getValue() << " position " << keypress.getPosition() << std::endl;
+        deleteBuffer.pop();
     }
 }
 
@@ -122,7 +172,10 @@ void Controller::operationInsert(CRDT keypress) {
         crdtVector.insert(crdtVector.begin() + insertIndex, keypress);
         content.insert(content.begin() + insertIndex, 1, keypress.getValue());
     }
-    cursorPosition++;
+
+    if(insertIndex <= cursorPosition) {
+        cursorPosition++;
+    }
 }
 
 int Controller::getCRDTInsertIndex(CRDT data) {
@@ -152,7 +205,7 @@ int Controller::getCRDTIndex(CRDT data) {
     CRDT current;
     for(int i = 0; i < crdtVector.size(); i++) {
         current = crdtVector.at(i);
-        if(isdoubleEqual(current.getPosition(), data.getPosition())) {
+        if(isdoubleEqual(current.getPosition(), data.getPosition()) && current.getSiteId() == data.getSiteId()) {
             return i;
         }
     }
@@ -182,9 +235,12 @@ void Controller::updateView() {
 
 void Controller::appendKeyPressedQ(CRDT data, int cursorPosition) {
     data.setPosition((double) cursorPosition);
+    data.setSiteId(msgr->selfSiteId);
+    data.setCounter(version.getCurrentVersion(msgr->selfSiteId) + 1);
     keyPressQ.push(data);
 }
 
 void Controller::addPeer(std::string address, int port) {
     msgr->addClient(address, port);
+    version.addSiteId(port);
 }

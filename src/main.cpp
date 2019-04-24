@@ -74,8 +74,14 @@ int main(int argc, char *argv[])
     try {
         QApplication EditorApp(argc, argv);
         Notepad Editor;
-        int app_port = 5932;
-        Controller cc(app_port);
+        int selfPort = std::stoi(std::string(argv[1]));
+        int peerPort1 = std::stoi(std::string(argv[2]));
+        int peerPort2 = std::stoi(std::string(argv[3]));
+        Controller cc(selfPort);
+
+        cc.addPeer("127.0.0.1", peerPort1);
+        cc.addPeer("127.0.0.1", peerPort2);
+
         Editor.show();
 
         QObject::connect(&cc, &Controller::updateContent, &Editor, &Notepad::setText);
