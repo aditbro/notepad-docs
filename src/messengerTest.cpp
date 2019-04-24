@@ -42,5 +42,4 @@ void testThreadingQueue() {
         throw "data not received properly";
     }
 
-    msgr.stopServer();
 }

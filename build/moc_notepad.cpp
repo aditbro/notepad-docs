@@ -21,8 +21,8 @@ QT_BEGIN_MOC_NAMESPACE
 QT_WARNING_PUSH
 QT_WARNING_DISABLE_DEPRECATED
 struct qt_meta_stringdata_Notepad_t {
-    QByteArrayData data[25];
-    char stringdata0[195];
+    QByteArrayData data[29];
+    char stringdata0[227];
 };
 #define QT_MOC_LITERAL(idx, ofs, len) \
     Q_STATIC_BYTE_ARRAY_DATA_HEADER_INITIALIZER_WITH_OFFSET(len, \
@@ -32,38 +32,43 @@ struct qt_meta_stringdata_Notepad_t {
 static const qt_meta_stringdata_Notepad_t qt_meta_stringdata_Notepad = {
     {
 QT_MOC_LITERAL(0, 0, 7), // "Notepad"
-QT_MOC_LITERAL(1, 8, 14), // "contentChanged"
-QT_MOC_LITERAL(2, 23, 0), // ""
-QT_MOC_LITERAL(3, 24, 10), // "keyPressed"
-QT_MOC_LITERAL(4, 35, 7), // "setText"
-QT_MOC_LITERAL(5, 43, 4), // "text"
-QT_MOC_LITERAL(6, 48, 11), // "newDocument"
-QT_MOC_LITERAL(7, 60, 4), // "open"
-QT_MOC_LITERAL(8, 65, 4), // "save"
-QT_MOC_LITERAL(9, 70, 6), // "saveAs"
-QT_MOC_LITERAL(10, 77, 5), // "print"
-QT_MOC_LITERAL(11, 83, 4), // "exit"
-QT_MOC_LITERAL(12, 88, 4), // "copy"
-QT_MOC_LITERAL(13, 93, 3), // "cut"
-QT_MOC_LITERAL(14, 97, 5), // "paste"
-QT_MOC_LITERAL(15, 103, 4), // "undo"
-QT_MOC_LITERAL(16, 108, 4), // "redo"
-QT_MOC_LITERAL(17, 113, 10), // "selectFont"
-QT_MOC_LITERAL(18, 124, 11), // "setFontBold"
-QT_MOC_LITERAL(19, 136, 4), // "bold"
-QT_MOC_LITERAL(20, 141, 16), // "setFontUnderline"
-QT_MOC_LITERAL(21, 158, 9), // "underline"
-QT_MOC_LITERAL(22, 168, 13), // "setFontItalic"
-QT_MOC_LITERAL(23, 182, 6), // "italic"
-QT_MOC_LITERAL(24, 189, 5) // "about"
+QT_MOC_LITERAL(1, 8, 10), // "keyPressed"
+QT_MOC_LITERAL(2, 19, 0), // ""
+QT_MOC_LITERAL(3, 20, 4), // "CRDT"
+QT_MOC_LITERAL(4, 25, 4), // "data"
+QT_MOC_LITERAL(5, 30, 14), // "cursorPosition"
+QT_MOC_LITERAL(6, 45, 7), // "setText"
+QT_MOC_LITERAL(7, 53, 4), // "text"
+QT_MOC_LITERAL(8, 58, 17), // "setCursorPosition"
+QT_MOC_LITERAL(9, 76, 3), // "idx"
+QT_MOC_LITERAL(10, 80, 11), // "newDocument"
+QT_MOC_LITERAL(11, 92, 4), // "open"
+QT_MOC_LITERAL(12, 97, 4), // "save"
+QT_MOC_LITERAL(13, 102, 6), // "saveAs"
+QT_MOC_LITERAL(14, 109, 5), // "print"
+QT_MOC_LITERAL(15, 115, 4), // "exit"
+QT_MOC_LITERAL(16, 120, 4), // "copy"
+QT_MOC_LITERAL(17, 125, 3), // "cut"
+QT_MOC_LITERAL(18, 129, 5), // "paste"
+QT_MOC_LITERAL(19, 135, 4), // "undo"
+QT_MOC_LITERAL(20, 140, 4), // "redo"
+QT_MOC_LITERAL(21, 145, 10), // "selectFont"
+QT_MOC_LITERAL(22, 156, 11), // "setFontBold"
+QT_MOC_LITERAL(23, 168, 4), // "bold"
+QT_MOC_LITERAL(24, 173, 16), // "setFontUnderline"
+QT_MOC_LITERAL(25, 190, 9), // "underline"
+QT_MOC_LITERAL(26, 200, 13), // "setFontItalic"
+QT_MOC_LITERAL(27, 214, 6), // "italic"
+QT_MOC_LITERAL(28, 221, 5) // "about"
 
     },
-    "Notepad\0contentChanged\0\0keyPressed\0"
-    "setText\0text\0newDocument\0open\0save\0"
-    "saveAs\0print\0exit\0copy\0cut\0paste\0undo\0"
-    "redo\0selectFont\0setFontBold\0bold\0"
-    "setFontUnderline\0underline\0setFontItalic\0"
-    "italic\0about"
+    "Notepad\0keyPressed\0\0CRDT\0data\0"
+    "cursorPosition\0setText\0text\0"
+    "setCursorPosition\0idx\0newDocument\0"
+    "open\0save\0saveAs\0print\0exit\0copy\0cut\0"
+    "paste\0undo\0redo\0selectFont\0setFontBold\0"
+    "bold\0setFontUnderline\0underline\0"
+    "setFontItalic\0italic\0about"
 };
 #undef QT_MOC_LITERAL
 
@@ -78,18 +83,14 @@ static const uint qt_meta_data_Notepad[] = {
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
-       2,       // signalCount
+       1,       // signalCount
 
  // signals: name, argc, parameters, tag, flags
-       1,    0,  109,    2, 0x06 /* Public */,
-       3,    1,  110,    2, 0x06 /* Public */,
+       1,    2,  109,    2, 0x06 /* Public */,
 
  // slots: name, argc, parameters, tag, flags
-       4,    1,  113,    2, 0x0a /* Public */,
-       6,    0,  116,    2, 0x08 /* Private */,
-       7,    0,  117,    2, 0x08 /* Private */,
-       8,    0,  118,    2, 0x08 /* Private */,
-       9,    0,  119,    2, 0x08 /* Private */,
+       6,    1,  114,    2, 0x0a /* Public */,
+       8,    1,  117,    2, 0x0a /* Public */,
       10,    0,  120,    2, 0x08 /* Private */,
       11,    0,  121,    2, 0x08 /* Private */,
       12,    0,  122,    2, 0x08 /* Private */,
@@ -98,17 +99,21 @@ static const uint qt_meta_data_Notepad[] = {
       15,    0,  125,    2, 0x08 /* Private */,
       16,    0,  126,    2, 0x08 /* Private */,
       17,    0,  127,    2, 0x08 /* Private */,
-      18,    1,  128,    2, 0x08 /* Private */,
-      20,    1,  131,    2, 0x08 /* Private */,
-      22,    1,  134,    2, 0x08 /* Private */,
-      24,    0,  137,    2, 0x08 /* Private */,
+      18,    0,  128,    2, 0x08 /* Private */,
+      19,    0,  129,    2, 0x08 /* Private */,
+      20,    0,  130,    2, 0x08 /* Private */,
+      21,    0,  131,    2, 0x08 /* Private */,
+      22,    1,  132,    2, 0x08 /* Private */,
+      24,    1,  135,    2, 0x08 /* Private */,
+      26,    1,  138,    2, 0x08 /* Private */,
+      28,    0,  141,    2, 0x08 /* Private */,
 
  // signals: parameters
-    QMetaType::Void,
-    QMetaType::Void, QMetaType::QString,    2,
+    QMetaType::Void, 0x80000000 | 3, QMetaType::Int,    4,    5,
 
  // slots: parameters
-    QMetaType::Void, QMetaType::QString,    5,
+    QMetaType::Void, QMetaType::QString,    7,
+    QMetaType::Void, QMetaType::Int,    9,
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
@@ -121,9 +126,9 @@ static const uint qt_meta_data_Notepad[] = {
     QMetaType::Void,
     QMetaType::Void,
     QMetaType::Void,
-    QMetaType::Void, QMetaType::Bool,   19,
-    QMetaType::Void, QMetaType::Bool,   21,
     QMetaType::Void, QMetaType::Bool,   23,
+    QMetaType::Void, QMetaType::Bool,   25,
+    QMetaType::Void, QMetaType::Bool,   27,
     QMetaType::Void,
 
        0        // eod
@@ -135,9 +140,9 @@ void Notepad::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
         auto *_t = static_cast<Notepad *>(_o);
         Q_UNUSED(_t)
         switch (_id) {
-        case 0: _t->contentChanged(); break;
-        case 1: _t->keyPressed((*reinterpret_cast< QString(*)>(_a[1]))); break;
-        case 2: _t->setText((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 0: _t->keyPressed((*reinterpret_cast< CRDT(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 1: _t->setText((*reinterpret_cast< QString(*)>(_a[1]))); break;
+        case 2: _t->setCursorPosition((*reinterpret_cast< int(*)>(_a[1]))); break;
         case 3: _t->newDocument(); break;
         case 4: _t->open(); break;
         case 5: _t->save(); break;
@@ -159,16 +164,9 @@ void Notepad::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, voi
     } else if (_c == QMetaObject::IndexOfMethod) {
         int *result = reinterpret_cast<int *>(_a[0]);
         {
-            using _t = void (Notepad::*)();
-            if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Notepad::contentChanged)) {
-                *result = 0;
-                return;
-            }
-        }
-        {
-            using _t = void (Notepad::*)(QString );
+            using _t = void (Notepad::*)(CRDT , int );
             if (*reinterpret_cast<_t *>(_a[1]) == static_cast<_t>(&Notepad::keyPressed)) {
-                *result = 1;
+                *result = 0;
                 return;
             }
         }
@@ -216,16 +214,10 @@ int Notepad::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 }
 
 // SIGNAL 0
-void Notepad::contentChanged()
+void Notepad::keyPressed(CRDT _t1, int _t2)
 {
-    QMetaObject::activate(this, &staticMetaObject, 0, nullptr);
-}
-
-// SIGNAL 1
-void Notepad::keyPressed(QString _t1)
-{
-    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)) };
-    QMetaObject::activate(this, &staticMetaObject, 1, _a);
+    void *_a[] = { nullptr, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
+    QMetaObject::activate(this, &staticMetaObject, 0, _a);
 }
 QT_WARNING_POP
 QT_END_MOC_NAMESPACE

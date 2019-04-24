@@ -61,23 +61,29 @@
 
 int main(int argc, char *argv[])
 {
+//    try {
+//        serializationTest();
+//        testAddClient();
+//        testThreadingQueue();
+//    } catch (const char* exc) {
+//        std::cout << exc << std::endl;
+//    } catch (...) {
+//        std::cout << "one of the test failed" << std::endl;
+//    }
+
     try {
-        serializationTest();
-        testAddClient();
-        testThreadingQueue();
+        QApplication EditorApp(argc, argv);
+        Notepad Editor;
+        int app_port = 5000;
+        Controller cc(app_port);
+        Editor.show();
+
+        QObject::connect(&cc, &Controller::updateContent, &Editor, &Notepad::setText);
+        QObject::connect(&cc, &Controller::updateCursor, &Editor, &Notepad::setCursorPosition);
+        QObject::connect(&Editor, &Notepad::keyPressed, &cc, &Controller::appendKeyPressedQ);
+
+        return EditorApp.exec();
     } catch (const char* exc) {
         std::cout << exc << std::endl;
-    } catch (...) {
-        std::cout << "one of the test failed" << std::endl;
     }
-
-    QApplication EditorApp(argc, argv);
-    Notepad Editor;
-    Controller cc;
-    Editor.show();
-
-    QObject::connect(&cc, &Controller::updateContent, &Editor, &Notepad::setText);
-    QObject::connect(&Editor, &Notepad::keyPressed, &cc, &Controller::broadcastCommand);
-
-    return EditorApp.exec();
 }

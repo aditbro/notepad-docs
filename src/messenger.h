@@ -14,7 +14,6 @@
 
 class Messenger {
 private:
-    int listenPort;
     std::thread senderThread;
     std::thread serverThread;
 
@@ -38,7 +37,8 @@ public:
     Messenger();
     Messenger(int port);
     ~Messenger();
-
+    Messenger& operator=(const Messenger&);
+    int listenPort;
     void addClient(std::string clientAddress, int port);
     struct sockaddr_in getClient(int idx);
     void broadcast(CRDT data);

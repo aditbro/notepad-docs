@@ -11,7 +11,7 @@
 #include <poll.h>
 
 Messenger::Messenger() {
-    Messenger(8181);
+
 }
 
 Messenger::~Messenger() {
@@ -98,14 +98,26 @@ void Messenger::sendData(CRDT data) {
 }
 
 void Messenger::receivingServer() {
-    char buffer[sizeof(CRDT)];
+    char buffer[sizeof(CRDT)+1];
     socklen_t len;
+    memset(buffer, 0, sizeof(CRDT));
+    memset(&cliaddr, 0, sizeof(cliaddr));
 
     while(isServerRunning) {       
         recvfrom(listenSocket, (char *)buffer, 100, MSG_WAITALL, ( struct sockaddr *) &cliaddr, &len);
+        buffer[sizeof(CRDT)] = '\0';
         CRDT newData = CRDT::deserialize(buffer);
-        std::cout << newData.getValue() << " newcoming data value" << std::endl;
-        this->inboxDataQ.push(newData);
+        std::cout << inet_ntoa(cliaddr.sin_addr) << " newcoming data value" << std::endl;
+
+        if(newData.getCommand() == 'I' || newData.getCommand() == 'D' || newData.getCommand() == 'M') {
+            this->inboxDataQ.push(newData);
+            std::cout << "valid incoming data " << newData.getValue() << std::endl;
+        }
+
+        if(newData.getCommand() == '0') {
+            std::cout << "stop signal detected" << std::endl;
+            isServerRunning = false;
+        }
     }
 
     std::cout << "receiving server end" << std::endl;
@@ -114,13 +126,18 @@ void Messenger::receivingServer() {
 void Messenger::stopServer() {
     if(isServerRunning && isSenderRunning) {
         addClient("127.0.0.1", listenPort);
-        CRDT stop(0, 0, '0', 0.0);
+        CRDT stop(0, '0', '0', 0.0);
         sendData(stop);
         isServerRunning = false;
-        while(isInboxEmpty());
+        int loop = 0;
+        while(isInboxEmpty() && loop++ < 100000);
         close(listenSocket);
         serverThread.join();
 
+        isSenderRunning = false;
+        close(sendSocket);
+        senderThread.join();
+    } else if (isSenderRunning) {
         isSenderRunning = false;
         close(sendSocket);
         senderThread.join();

@@ -3,7 +3,11 @@
 #include <cstring>
 #include "crdt.h"
 
-CRDT::CRDT(int siteId, char command, char value, float position){
+CRDT::CRDT() {
+
+}
+
+CRDT::CRDT(int siteId, char command, char value, double position){
     this->siteId = siteId;
     this->command = command;
     this->value = value;
@@ -34,11 +38,11 @@ char CRDT::getValue(){
     return this->value;
 }
 
-void CRDT::setPosition(float position) {
+void CRDT::setPosition(double position) {
     this->position = position;
 }
 
-float CRDT::getPosition(){
+double CRDT::getPosition(){
     return this->position;
 }
 

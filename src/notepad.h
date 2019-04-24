@@ -54,6 +54,7 @@
 //! [all]
 //! [1]
 #include <QMainWindow>
+#include "crdt.h"
 //! [1]
 
 //! [2]
@@ -86,12 +87,11 @@ private:
     bool eventFilter(QObject *, QEvent *);
 
 signals:
-    void contentChanged();
-
-    void keyPressed(QString);
+    void keyPressed(CRDT data, int cursorPosition);
 
 public slots:
     void setText(QString text);
+    void setCursorPosition(int idx);
 
 private slots:
     void newDocument();
@@ -130,6 +130,7 @@ private slots:
 private:
     Ui::Notepad *ui;
     QString currentFile;
+    char convertMoveToChar(int move);
 //! [6]
 };
 //! [all]

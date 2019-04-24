@@ -48,6 +48,7 @@
 **
 ****************************************************************************/
 
+#include <iostream>
 #include <QFile>
 #include <QFileDialog>
 #include <QTextStream>
@@ -61,9 +62,9 @@
 #include <QPrinter>
 #endif // QT_CONFIG(printer)
 #endif // QT_PRINTSUPPORT_LIB
+#include <QKeyEvent>
 #include <QFont>
 #include <QFontDialog>
-#include <QKeyEvent>
 
 #include "notepad.h"
 #include "ui_notepad.h"
@@ -253,11 +254,6 @@ void Notepad::about()
 
 }
 
-void Notepad::setText(QString text)
-{
-    this->ui->textEdit->setText(text);
-}
-
 bool Notepad::eventFilter(QObject *obj, QEvent *event) {
     if (obj == this->ui->textEdit) {
         if (event->type() == QEvent::KeyPress) {
@@ -273,11 +269,51 @@ bool Notepad::eventFilter(QObject *obj, QEvent *event) {
     }
 }
 
-void Notepad::keyPressEvent(QKeyEvent *e) {
-    QString pressedKey = e->text();
-    emit keyPressed(pressedKey);
+void Notepad::keyPressEvent(QKeyEvent *ke) {
+    CRDT event;
+    QKeyEvent e = *ke;
+    int cursorPosition = ui->textEdit->textCursor().position();
+
+    if(e.key() == Qt::Key_Backspace && cursorPosition != 0) {
+        event.setCommand('D');
+        std::string text = this->ui->textEdit->toPlainText().toStdString();
+        event.setValue(text[cursorPosition-1]);
+    } else if(e.key() >= Qt::Key_Left && e.key() <= Qt::Key_Down) {
+        event.setCommand('M');
+        event.setValue(convertMoveToChar(e.key()));
+    } else {
+        event.setCommand('I');
+        event.setValue(e.text().toStdString().c_str()[0]);
+    }
+
+    std::cout << event.getPosition() << " position" << std::endl;
+    emit keyPressed(event, cursorPosition);
+}
+
+char Notepad::convertMoveToChar(int key) {
+    switch (key) {
+        case Qt::Key_Left : return 'L';
+        case Qt::Key_Right : return 'R';
+        case Qt::Key_Up : return 'U';
+        case Qt::Key_Down : return 'D';
+    }
+
+    return '0';
 }
 
 void Notepad::keyReleaseEvent(QKeyEvent *e) {
 //    QMainWindow::keyReleaseEvent(e);
+
+}
+
+void Notepad::setText(QString text)
+{
+    this->ui->textEdit->setText(text);
+}
+
+void Notepad::setCursorPosition(int position) {
+    this->ui->textEdit->moveCursor(QTextCursor::Start, QTextCursor::MoveAnchor);
+    for(int i = 0; i < position; i++){
+        this->ui->textEdit->moveCursor(QTextCursor::Right, QTextCursor::MoveAnchor);
+    }
 }

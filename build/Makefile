@@ -921,6 +921,40 @@ moc_controller.cpp: ../src/controller.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qcontainerfwd.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qobject_impl.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/QKeyEvent \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qevent.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qtguiglobal.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qtgui-config.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qwindowdefs.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qregion.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qrect.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qmargins.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qsize.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qpoint.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qdatastream.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qiodevice.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qkeysequence.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qvariant.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qmap.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qdebug.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qhash.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qlocale.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qvector.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qset.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qurl.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qurlquery.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qfile.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qfiledevice.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qvector2d.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qtouchdevice.h \
+		../src/messenger.h \
+		../src/crdt.h \
 		moc_predefs.h \
 		../../../Qt/5.12.2/gcc_64/bin/moc
 	/home/aditbro/Qt/5.12.2/gcc_64/bin/moc $(DEFINES) --include /home/aditbro/Projects/sister/build/moc_predefs.h -I/home/aditbro/Qt/5.12.2/gcc_64/mkspecs/linux-g++ -I/home/aditbro/Projects/sister/src -I/home/aditbro/Qt/5.12.2/gcc_64/include -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtPrintSupport -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtWidgets -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtGui -I/home/aditbro/Qt/5.12.2/gcc_64/include/QtCore -I. -I/usr/include/c++/7 -I/usr/include/x86_64-linux-gnu/c++/7 -I/usr/include/c++/7/backward -I/usr/lib/gcc/x86_64-linux-gnu/7/include -I/usr/local/include -I/usr/lib/gcc/x86_64-linux-gnu/7/include-fixed -I/usr/include/x86_64-linux-gnu -I/usr/include ../src/controller.h -o moc_controller.cpp
@@ -978,11 +1012,23 @@ controller.o: ../src/controller.cpp ../../../Qt/5.12.2/gcc_64/include/QtCore/QSt
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qstringalgorithms.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qstringview.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qstringbuilder.h \
-		../src/controller.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/QObject \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qobject.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/QKeyEvent \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qevent.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qtguiglobal.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qtgui-config.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qwindowdefs.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qobjectdefs.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qobjectdefs_impl.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qwindowdefs_win.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qregion.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qrect.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qmargins.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qsize.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qpoint.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qdatastream.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qscopedpointer.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qiodevice.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qobject.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qlist.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qalgorithms.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qiterator.h \
@@ -993,11 +1039,33 @@ controller.o: ../src/controller.cpp ../../../Qt/5.12.2/gcc_64/include/QtCore/QSt
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qregexp.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qstringmatcher.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qcoreevent.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qscopedpointer.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qmetatype.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qvarlengtharray.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/qcontainerfwd.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qobject_impl.h
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qobject_impl.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qkeysequence.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qvariant.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qmap.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qdebug.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qhash.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qtextstream.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qlocale.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qshareddata.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qvector.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qset.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qcontiguouscache.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qsharedpointer.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qsharedpointer_impl.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qurl.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qurlquery.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qfile.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/qfiledevice.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qvector2d.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/qtouchdevice.h \
+		../src/controller.h \
+		../../../Qt/5.12.2/gcc_64/include/QtCore/QObject \
+		../src/messenger.h \
+		../src/crdt.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o controller.o ../src/controller.cpp
 
 crdt.o: ../src/crdt.cpp ../src/crdt.h
@@ -1124,10 +1192,11 @@ main.o: ../src/main.cpp ../../../Qt/5.12.2/gcc_64/include/QtWidgets/QApplication
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qicon.h \
 		../src/controller.h \
 		../../../Qt/5.12.2/gcc_64/include/QtCore/QObject \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/QKeyEvent \
+		../src/messenger.h \
 		../src/crdt.h \
 		../src/crdtTest.h \
-		../src/messengerTest.h \
-		../src/messenger.h
+		../src/messengerTest.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../src/main.cpp
 
 messenger.o: ../src/messenger.cpp ../src/messenger.h \
@@ -1260,50 +1329,16 @@ notepad.o: ../src/notepad.cpp ../../../Qt/5.12.2/gcc_64/include/QtCore/QFile \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qpagedpaintdevice.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qpagelayout.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qpagesize.h \
+		../../../Qt/5.12.2/gcc_64/include/QtGui/QKeyEvent \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/QFont \
 		../../../Qt/5.12.2/gcc_64/include/QtWidgets/QFontDialog \
 		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qfontdialog.h \
-		../../../Qt/5.12.2/gcc_64/include/QtGui/QKeyEvent \
 		../src/notepad.h \
 		../../../Qt/5.12.2/gcc_64/include/QtWidgets/QMainWindow \
 		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qmainwindow.h \
 		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qtabwidget.h \
 		../../../Qt/5.12.2/gcc_64/include/QtGui/qicon.h \
-		ui_notepad.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/QVariant \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/QAction \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qaction.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qactiongroup.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/QApplication \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qapplication.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qcoreapplication.h \
-		../../../Qt/5.12.2/gcc_64/include/QtCore/qeventloop.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qdesktopwidget.h \
-		../../../Qt/5.12.2/gcc_64/include/QtGui/qguiapplication.h \
-		../../../Qt/5.12.2/gcc_64/include/QtGui/qinputmethod.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/QMenu \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qmenu.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/QMenuBar \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qmenubar.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/QStatusBar \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qstatusbar.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/QTextEdit \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qtextedit.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qabstractscrollarea.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qframe.h \
-		../../../Qt/5.12.2/gcc_64/include/QtGui/qtextdocument.h \
-		../../../Qt/5.12.2/gcc_64/include/QtGui/qtextoption.h \
-		../../../Qt/5.12.2/gcc_64/include/QtGui/qtextcursor.h \
-		../../../Qt/5.12.2/gcc_64/include/QtGui/qtextformat.h \
-		../../../Qt/5.12.2/gcc_64/include/QtGui/qpen.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/QToolBar \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qtoolbar.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/QVBoxLayout \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qboxlayout.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qlayout.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qlayoutitem.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/qgridlayout.h \
-		../../../Qt/5.12.2/gcc_64/include/QtWidgets/QWidget
+		ui_notepad.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o notepad.o ../src/notepad.cpp
 
 qrc_notepad.o: qrc_notepad.cpp 
