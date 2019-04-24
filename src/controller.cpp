@@ -54,16 +54,17 @@ double Controller::getKeyPressInsertPosition(CRDT keyPress) {
 
     if((int) keyPress.getPosition() ==  crdtVector.size()) {
         if(crdtVector.size() == 0) {
-            position = 1;
+            position = 1000000;
         } else {
-            position = crdtVector.size() + 1;
+            position = crdtVector.back().getPosition() + 100000;
         }
     } else if((int)keyPress.getPosition() == 0) {
-        position = getCRDTPosition(0)/2;
+        position = (int)getCRDTPosition(0)/2;
     } else {
+        double before_pos;
         position = getCRDTPosition((int) keyPress.getPosition());
         position += getCRDTPosition((int) keyPress.getPosition() - 1);
-        position = position/2;
+        position = (int)position/2;
     }
 
     std::cout << "position after " << position << std::endl;

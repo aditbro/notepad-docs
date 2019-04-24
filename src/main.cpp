@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
     try {
         QApplication EditorApp(argc, argv);
         Notepad Editor;
-        int app_port = 5000;
+        int app_port = 5932;
         Controller cc(app_port);
         Editor.show();
 

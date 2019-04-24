@@ -286,7 +286,6 @@ void Notepad::keyPressEvent(QKeyEvent *ke) {
         event.setValue(e.text().toStdString().c_str()[0]);
     }
 
-    std::cout << event.getPosition() << " position" << std::endl;
     emit keyPressed(event, cursorPosition);
 }
 
