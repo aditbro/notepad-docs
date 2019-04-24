@@ -74,13 +74,21 @@ int main(int argc, char *argv[])
     try {
         QApplication EditorApp(argc, argv);
         Notepad Editor;
-        int selfPort = std::stoi(std::string(argv[1]));
-        int peerPort1 = std::stoi(std::string(argv[2]));
-        int peerPort2 = std::stoi(std::string(argv[3]));
+        std::string separator = ":";
+        std::string arg1 = std::string(argv[1]);
+        std::string arg2 = std::string(argv[2]);
+        std::string arg3 = std::string(argv[3]);
+
+        int selfPort = std::stoi(arg1.substr(arg1.find(separator)+1));
+        int peerPort1 = std::stoi(arg2.substr(arg2.find(separator)+1));
+        int peerPort2 = std::stoi(arg3.substr(arg3.find(separator)+1));
+
         Controller cc(selfPort);
 
-        cc.addPeer("127.0.0.1", peerPort1);
-        cc.addPeer("127.0.0.1", peerPort2);
+        cc.addPeer(arg2.substr(0, arg2.find(separator)), peerPort1);
+        cc.addPeer(arg3.substr(0, arg3.find(separator)), peerPort2);
+
+        std::cout << arg2.substr(0, arg2.find(separator)) << std::endl;
 
         Editor.show();
 
