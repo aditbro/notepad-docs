@@ -25,11 +25,11 @@ Messenger::Messenger(int port) {
     memset(&servaddr, 0, sizeof(servaddr));
     memset(&cliaddr, 0, sizeof(cliaddr));
 
-    if ( (listenSocket = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
+    if ( (listenSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0 ) {
         throw "socket creation failed";
     }
 
-    if ( (sendSocket = socket(AF_INET, SOCK_DGRAM, 0)) < 0 ) {
+    if ( (sendSocket = socket(AF_INET, SOCK_DGRAM, IPPROTO_UDP)) < 0 ) {
         throw "binding send socket failed";
     }
 
@@ -96,7 +96,7 @@ void Messenger::sendData(CRDT data) {
     int i = 1;
     for(struct sockaddr_in client : clients) {
 //        sleep(1);
-        std::cout << "sending data " << data.getValue() << std::endl;
+        std::cout << "sending data " << data.getValue() << " to " << inet_ntoa(client.sin_addr) << std::endl;
         sendto(sendSocket, serialized_data, sizeof(CRDT), MSG_WAITALL, (struct sockaddr *) &client, sizeof(client));
     }
 }
